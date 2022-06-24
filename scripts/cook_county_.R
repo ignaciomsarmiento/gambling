@@ -96,7 +96,7 @@ sf::sf_use_s2(FALSE)
 join_map <- st_join(blocks_shp, community_areas_sides, join = st_intersects) #esta bien
 
 #hacer el merge con los blockgroups (cook county)
-
+#prueba
 # Map with ggplot chicago + blockgroups
 
 ggplot2::ggplot() +
