@@ -12,26 +12,29 @@ rm(list=ls())
 
 setwd("C:\Users\BIBIANA\Desktop\Gambling")
 
-require("here")
 # Packages required
-
-# install.packages("rgdal")
-# install.packages("RSocrata")
-# install.packages("read.socrata")
-# install.packages("acs")
-# install.packages("get_acs")
-# install.packages("viridis")
-# install.packages("magrittr")
-# install.packages("tidycensus")
 
 require("tidycensus", quietly = TRUE)
 require("sf", quietly = TRUE)
 require("dplyr", quietly = TRUE)
 require("ggplot2", quietly = TRUE)
 
+
 library(foreign)
 library(rgdal)
 library(sf)
+library(dplyr)
+
+  # install.packages("rgdal")
+  # install.packages("RSocrata")
+  # install.packages("read.socrata")
+  # install.packages("acs")
+  # install.packages("get_acs")
+  # install.packages("viridis")
+  # install.packages("magrittr")
+  # install.packages("tidycensus")
+
+
 
 # Reading Chicago data with RSocrata
 
@@ -66,18 +69,24 @@ cook_bg <- ggplot2::ggplot() +
 plot(cook_bg)
 
 # Dataframe with community areas and sides
-setwd("/Users/iggy/Library/CloudStorage/OneDrive-UniversidaddelosAndes/Ignacio-Sarmiento/Gambling/")
+
+  #setwd("/Users/iggy/Library/CloudStorage/OneDrive-UniversidaddelosAndes/Ignacio-Sarmiento/Gambling/")
+
 sides <- readxl::read_excel("Analysis/Data/community_areas_sides.xlsx")
 
 
-# Boundaries - Census Blocks - 2010 -Downloaded on 02/06/22
-#poner de donde lo bajamos
-blocks_shp <- read_sf("Analysis/Data/Boundaries - Census Blocks - 2010/geo_export_fb4ce0e7-7a9a-4f5d-9b88-961cb798be53.shp")
+# Boundaries - Census Blocks - 2010 - Downloaded on 02/06/22 from:
+  # https://data.cityofchicago.org/Facilities-Geographic-Boundaries/Boundaries-Census-Blocks-2010/mfzt-js4n
+
+blocks_shp <- read_sf("Analysis/Data/Boundaries - Census Blocks - 2010/
+                      geo_export_fb4ce0e7-7a9a-4f5d-9b88-961cb798be53.shp")
 
 
-# Boundaries - Community Areas - 2010 -Downloaded on 10/06/22
-#buscar otro y poner de donde lo sacamos
-community_areas_shp <- read_sf("Analysis/Data/Boundaries - Community Areas (current)/geo_export_8df4d1ad-b38f-466b-af48-730cc28f9135.shp")
+# Boundaries - Community Areas - 2010 - Downloaded on 30/06/22 from: 
+  # https://data.cityofchicago.org/Facilities-Geographic-Boundaries/Boundaries-Community-Areas-current-/cauq-8yn6
+
+community_areas_shp <- read_sf("Analysis/Data/Boundaries - Community Areas/
+                               geo_export_3646c425-a3eb-42a1-964a-87e800c0e605.shp")
 
 #---------------------------------------------------------------------------------------------------------------#
 
@@ -88,15 +97,20 @@ community_areas_sides <- left_join(community_areas_shp, sides, by = c("community
 community_areas_sides$community[is.na(community_areas_sides$side)]
 
 
-# Map with st_join
+# st_join blocks_shp + community_areas_sides
 
 sf::sf_use_s2(FALSE)
 
-#hacer este merge
-join_map <- st_join(blocks_shp, community_areas_sides, join = st_intersects) #esta bien
+join_map <- st_join(blocks_shp, community_areas_sides, join = st_intersects) 
 
-#hacer el merge con los blockgroups (cook county)
-#prueba
+# st_join join_map + blockgroups
+
+st_crs(join_map) <- 4269
+
+final_join <- st_join(join_map, blockgroups, join = st_intersects)
+
+#---------------------------------------------------------------------------------------------------------------#
+
 # Map with ggplot chicago + blockgroups
 
 ggplot2::ggplot() +
