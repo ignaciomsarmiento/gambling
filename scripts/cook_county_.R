@@ -118,15 +118,27 @@ final_join <- st_join(join_map, blockgroups, join = st_intersects)
 
 # Counties bordering Cook County 
 
-  # Lake County
+  # Lake County - Downloaded on 21/07/22 from: 
+    # https://data-lakecountyil.opendata.arcgis.com/datasets/lakecountyil::lake-county-boundary/about
 
-  # McHenry County
+  lake_county <- read_sf("Data/Lake_County_Boundary/Lake_County_Boundary.shp")
 
-  # Kane County 
+  # McHenry County - Downloaded on 21/07/22 from: 
+    #
+  
+  mchenry_county <- read_sf("Data/McHenry_County_Boundary/border_level6_polygon.shp")
 
-  # DuPage County
+  # Kane County - Downloaded on 21/07/22 from: 
+    #
 
-  # Will County
+  kane_county <- read_sf("Data/Kane_County_Boundary/border_level8_polygon.shp")
+  
+  # DuPage County - Downloaded on 21/07/22 from: 
+    #
+  
+  dupage_county <- read_sf("Data/DuPage_County_Boundary/border_level6_polygon.shp")
+
+  # Will County 
 
 #---------------------------------------------------------------------------------------------------------------#
 
