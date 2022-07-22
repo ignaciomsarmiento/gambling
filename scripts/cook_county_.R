@@ -116,6 +116,20 @@ final_join <- st_join(join_map, blockgroups, join = st_intersects)
 
 #---------------------------------------------------------------------------------------------------------------#
 
+# Counties bordering Cook County 
+
+  # Lake County
+
+  # McHenry County
+
+  # Kane County 
+
+  # DuPage County
+
+  # Will County
+
+#---------------------------------------------------------------------------------------------------------------#
+
 # Map with ggplot chicago + blockgroups
 
 ggplot2::ggplot() +
