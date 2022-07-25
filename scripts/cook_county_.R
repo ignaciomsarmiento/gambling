@@ -118,27 +118,30 @@ final_join <- st_join(join_map, blockgroups, join = st_intersects)
 
 # Counties bordering Cook County 
 
-  # Lake County - Downloaded on 21/07/22 from: 
-    # https://data-lakecountyil.opendata.arcgis.com/datasets/lakecountyil::lake-county-boundary/about
-
-  lake_county <- read_sf("Data/Lake_County_Boundary/Lake_County_Boundary.shp")
-
-  # McHenry County - Downloaded on 21/07/22 from: 
-    #
+  # Lake County
   
-  mchenry_county <- read_sf("Data/McHenry_County_Boundary/border_level6_polygon.shp")
+    lake_county <- tidycensus::get_decennial(geography="block group", variables="H001001", state="IL",
+                                            county="Lake County", year=2010, geometry=T)
 
-  # Kane County - Downloaded on 21/07/22 from: 
-    #
+  # McHenry County
+    
+    mchenry_county <- tidycensus::get_decennial(geography="block group", variables="H001001", state="IL",
+                                             county="McHenry County", year=2010, geometry=T)
 
-  kane_county <- read_sf("Data/Kane_County_Boundary/border_level8_polygon.shp")
+  # Kane County
+
+    kane_county <- tidycensus::get_decennial(geography="block group", variables="H001001", state="IL",
+                                              county="Kane County", year=2010, geometry=T)
   
-  # DuPage County - Downloaded on 21/07/22 from: 
-    #
+  # DuPage County 
   
-  dupage_county <- read_sf("Data/DuPage_County_Boundary/border_level6_polygon.shp")
+    dupage_county <- tidycensus::get_decennial(geography="block group", variables="H001001", state="IL",
+                                               county="Dupage County", year=2010, geometry=T)
 
   # Will County 
+    
+    will_county <- tidycensus::get_decennial(geography="block group", variables="H001001", state="IL",
+                                               county="Will County", year=2010, geometry=T)
 
 #---------------------------------------------------------------------------------------------------------------#
 
