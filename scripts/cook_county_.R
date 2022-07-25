@@ -151,9 +151,4 @@ ggplot2::ggplot() +
   ggplot2::geom_sf(data = chicago, ggplot2::aes(geometry = chicago$the_geom.coordinates), fill = NA)+
   ggplot2::geom_polygon(data = blocks_shp, aes(x = long, y = lat, group = group), colour = "black", fill = NA)
 
-#---------------------------------------------------------------------------------------------------------------#
-
-# Crimes 
-
-crime_2010 <- readRDS("Data/crime_data/crimes_2010_download_07_Jan_2022_09.15.Rds")
 
